@@ -1,0 +1,65 @@
+$xl: 87.5em; // 4k and hi-res desktop
+$lg: 60em; // 1080 and hi-res laptops
+$med: 40em; // hi-res tablets and low-res laptops
+$sm: 28em; // mobile and low-res tablets
+$xs: 20em; // mobile only
+
+.header{
+    position: absolute;
+    top: 0;
+    right: 10px;
+
+    .button{
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        // background-color: red;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        @media (max-width: $lg) {
+            width: 60px;
+            height: 60px;
+        }
+    }
+
+    .burger{
+        width: 100%;
+        &::after, &::before{
+            content: "";
+            display: block;
+            height: 1px;
+            width: 40%;
+            margin: auto;
+            background-color: white;
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        &::after{
+            top: -5px;
+        }
+
+        &::before{
+            top: 5px;
+        }
+    }
+
+    .burgerActive{
+
+        &::after{
+            background-color: white;
+            transform: rotate(45deg);
+            top: -1px;
+        }
+
+        &::before{
+            background-color: white;
+            transform: rotate(-45deg);
+            top: 0px;
+        }
+        
+    }
+}
+
