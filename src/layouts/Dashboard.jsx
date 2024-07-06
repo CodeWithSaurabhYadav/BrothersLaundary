@@ -1,16 +1,23 @@
-import React from 'react'
+import React from "react";
 
-import { Link } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
+import logoutUser from "../pages/auth/firebase/logout";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+
   return (
     <div>
       <div className="flex justify-center gap-4">
-        <Link to="/auth/login" className='border border-3 p-3 bg-brand-color-default rounded-xl hover:bg-white ease-in w-[200px] text-center'>Login</Link>
-        <Link to="/auth/register" className='border border-3 p-3 bg-brand-color-default rounded-xl hover:bg-white ease-in w-[200px] text-center'>Register</Link>
+        <button
+          onClick={() => logoutUser(navigate)}
+          className="border border-3 p-3 bg-brand-color-default rounded-xl hover:bg-white ease-in w-[200px] text-center"
+        >
+          Logout
+        </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;

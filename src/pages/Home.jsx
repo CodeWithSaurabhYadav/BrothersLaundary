@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import useSize from "../hooks/useSize";
+
 import Reveal from "../components/utils/Reveal";
 
 import { useNavigate } from "react-router-dom";
@@ -6,14 +8,17 @@ import { useNavigate } from "react-router-dom";
 import HeroImage from "../assets/images/hero.jpg";
 import { MagnifyingGlass } from "@phosphor-icons/react";
 
-import { PostalCodeModal } from "../components/utils/modals";
+import { PostalCodeModal } from "../components/ui/modals";
 
 import { postalCodesServed } from "../data";
 import { AnimatePresence } from "framer-motion";
 
 const Home = () => {
   const navigate = useNavigate();
+  const [windowWidth, windowHeight] = useSize();
 
+  // console.log(windowWidth, windowHeight);
+  
   const [pinCode, setPinCode] = useState("");
   const [searchHover, setSearchHover] = useState(false);
 
@@ -54,7 +59,7 @@ const Home = () => {
           className="w-full blur-md z-[-1] opacity-[0.2]"
         />
         <div className="absolute flex flex-col gap-2 w-full h-full justify-center items-center top-0 left-0 w-1/2 text-center">
-          <div className="w-[50%]">
+          <div className="w-[100%] sm:w-[100%] md:w-[100%] lg:w-[75%] xl:w-[50%]">
             <Reveal>
               <h1 className="text-2xl md:text-4xl lg:text-6xl font-bold text-white">
                 24 Hours{" "}
@@ -65,7 +70,7 @@ const Home = () => {
               </h1>
             </Reveal>
           </div>
-          <div className="w-[50%]">
+          <div className="w-[100%] sm:w-[100%] md:w-[100%] lg:w-[75%] xl:w-[50%]">
             <Reveal>
               <h3 className="text-medium md:text-1xl lg:text-2xl text-white mt-4">
                 We provide professional, reliable, fast and inexpensive cleaning
@@ -74,9 +79,9 @@ const Home = () => {
               </h3>
             </Reveal>
           </div>
-          <div className="w-[50%] flex justify-center">
+          <div className="w-[100%] sm:w-[100%] md:w-[100%] lg:w-[70%] xl:w-[50%] flex justify-center">
             <form
-              className=" w-[50%] sm:w-full md:w-[75%] xl:w-[75%] "
+              className="w-[80%] sm:w-[80%] md:w-[75%] lg:w-[50%] sm:w-full md:w-[75%] xl:w-[75%] "
               onSubmit={(e) => {
                 e.preventDefault();
                 searchPostalCodeHandler();
@@ -84,20 +89,20 @@ const Home = () => {
             >
               <label className="relative block h-10 text-4xl p-3">
                 <input
-                  className="placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-5 pl-4 pr-[70px] pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 text-xl"
+                  className="placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-1 md:py-2 lg:p-5 pl-3 md:pl-4 lg:pl-4 pr-[70px] pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 text-xl"
                   placeholder="Search for anything..."
                   type="text"
                   value={pinCode}
                   onChange={handleChange}
                 />
-                <span className="absolute top-[20px] right-6 transition-all">
+                <span className="absolute top-[15px] md:top-[20px] lg:top-[20px] right-6 transition-all">
                   <MagnifyingGlass
-                    size={50}
+                    size={windowWidth > 900 ? 50 : 30}
                     weight={searchHover ? "fill" : "regular"}
                     onClick={searchPostalCodeHandler}
                     onMouseEnter={searchHoverHandler}
                     onMouseLeave={searchHoverHandler}
-                    className="cursor-pointer text-slate-400 hover:text-brand-color transition-all"
+                    className="cursor-pointer text-slate-400 hover:text-brand transition-all"
                   />
                 </span>
               </label>

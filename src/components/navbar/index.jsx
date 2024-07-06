@@ -21,7 +21,7 @@ const Menu = () => {
     <>
       <div className="w-30 flex justify-center items-center bg-primary-color p-2 border-solid border-b-2 border-[#FFF]">
         <Link to={"/"}>
-          <img src={Logo} alt="Logo" className="w-[150px]" />
+          <img src={Logo} alt="Logo" className="w-[100px] md:w-[120px] lg:w-[150px] xl:w-[150px]" />
         </Link>
       </div>
       <div className={styles.main}>

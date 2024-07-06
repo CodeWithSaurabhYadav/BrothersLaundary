@@ -29,11 +29,16 @@ const Home = Loadable(lazy(() => import("./pages/Home")));
 const Locations = Loadable(lazy(() => import("./pages/Locations")));
 const Services = Loadable(lazy(() => import("./pages/Services")));
 const About = Loadable(lazy(() => import("./pages/About")));
-const CollectionsDelivery = Loadable(lazy(() => import("./pages/CollectionsDelivery")));
+const CollectionsDelivery = Loadable(
+  lazy(() => import("./pages/CollectionsDelivery"))
+);
 const App = Loadable(lazy(() => import("./App")));
 
+
+import { Protected, Authenticated } from "./pages/auth/Protected";
 const Login = Loadable(lazy(() => import("./pages/auth/Login")));
 const Register = Loadable(lazy(() => import("./pages/auth/Register")));
+const OTP = Loadable(lazy(() => import("./pages/auth/OTP")));
 
 const router = createBrowserRouter([
   {
@@ -46,7 +51,11 @@ const router = createBrowserRouter([
       { path: "services", element: <Services /> },
       { path: "about", element: <About /> },
       { path: "collections-delivery", element: <CollectionsDelivery /> },
-      { path: "dashboard", element: <Dashboard />},
+      {
+        path: "dashboard",
+        element: <Protected />,
+        children: [{ path: "", element: <Dashboard /> }],
+      },
       { path: "404", element: <PageNotFount404 /> },
       { path: "*", element: <Navigate to="/404" replace /> },
     ],
@@ -55,12 +64,18 @@ const router = createBrowserRouter([
     path: "/auth",
     element: <Auth />,
     children: [
+      { path: "", element: <Navigate to="/auth/login" replace />},
       { path: "login", element: <Login /> },
-      {  path: "register", element: <Register /> },
+      {
+        path: "register",
+        element: <Authenticated />,
+        children: [{ path: "", element: <Register /> }],
+      },
       { path: "404", element: <PageNotFount404 /> },
+      { path: "verify", element: <OTP /> },
       { path: "*", element: <Navigate to="/404" replace /> },
-    ]
-  }
+    ],
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

@@ -24,7 +24,7 @@ const PostalCodeModal = ({ closeModal }) => {
       animate="visible"
       exit="exit"
     >
-      <div className="flex flex-col justify-center items-center bg-white w-[50%] sm:w-full md:w-[50%] xl:w-[30%] h-50 rounded-xl gap-5">
+      <div className="flex flex-col justify-center items-center bg-white w-[90%] md:w-[50%] lg:w-[50%] xl:w-[30%] h-50 rounded-xl gap-5">
         <div className="flex flex-col justify-center items-center gap-5 mt-10">
           <MapPinArea
             size={100}
